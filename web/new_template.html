@@ -1,0 +1,14 @@
+<div class="row" ng-controller="creation">
+  <div class="col-6">
+	<div class="container">
+  		<h2>Template:</h2>
+		<textarea class="form-control" height="500px" ng-model="newTemplate" ng-change="preview()" rows="30"></textarea>
+	</div>
+  </div>
+  <div class="col-6">
+  	<div class="container">
+  		<h2>Result:</h2>
+  	<div ng-include="'generation_result.html'"></div>
+  	</div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<a href="#" ng-click="renderAST()">Render the template's AST</a>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" data-ng-repeat="(chunkName, res) in resultingFile.chunks">
+    <a ng-class="openedTab == chunkName ? 'active' : ''" class="nav-link" id="{{chunkName}}-tab" data-toggle="tab" href="#" ng-init="res.display=$first" role="tab" ng-click="select(chunkName)">{{chunkName}}</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div ng-show="openedTab == chunkName" class="show active tab-pane fade" id = "{{chunkName}}" role="tabpanel" aria-labelledby="{{chunkName}}-tab" data-ng-repeat="(chunkName, res) in resultingFile.chunks">
+    <textarea class="form-control" height="500px" ng-model="res.chunkContent" rows="28"></textarea>
+  </div>
+</div>
+<svg id="graphContainer">
+  <g/>
+</svg>

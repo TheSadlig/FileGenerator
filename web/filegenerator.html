@@ -1,0 +1,9 @@
+<div class="container" ng-controller="generator">
+  Template:
+  <select ng-change="updateResult()" ng-model="templatePath">
+	<option data-ng-repeat="d in data" value="{{d.templatePath[0]}}">{{d.templateName[0]}}</option>
+  </select>
+
+  <a href="#" ng-click="debug()"> debug</a>
+  <div ng-include="'generation_result.html'"></div>
+</div>
