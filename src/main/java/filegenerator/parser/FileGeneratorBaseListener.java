@@ -15,11 +15,9 @@ import filegenerator.ast.nodes.ParameterNode;
 import filegenerator.ast.nodes.RawTextNode;
 import filegenerator.ast.nodes.ValueNode;
 import filegenerator.ast.nodes.VariableNode;
-
+import java.util.Stack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Stack;
 
 /**
  *
@@ -128,10 +126,10 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
         nodeSetStack.pop();
 
         if (stack.size() > 0) {
-            LOGGER.error("Stack not empty at the end");
+            LOGGER.warn("Stack not empty at the end");
         }
         if (nodeSetStack.size() > 0) {
-            LOGGER.error("Node Set Stack not empty at the end");
+            LOGGER.warn("Node Set Stack not empty at the end");
         }
     }
 
