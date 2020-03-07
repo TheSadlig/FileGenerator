@@ -15,12 +15,14 @@ public class CastWizard {
         }
         try {
             return Long.parseLong(element);
-        } catch (NumberFormatException ex) {}
+        } catch (NumberFormatException ex) {
+        }
         try {
             BigDecimal value = new BigDecimal(element);
-            value.setScale(2);
+            value = value.setScale(2);
             return value;
-        } catch (NumberFormatException ex) {}
+        } catch (NumberFormatException ex) {
+        }
 
         return element;
     }
