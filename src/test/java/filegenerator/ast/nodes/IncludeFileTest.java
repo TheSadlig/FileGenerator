@@ -1,7 +1,9 @@
-package filegenerator.ast;
+package filegenerator.ast.nodes;
 
+import filegenerator.ast.AbstractAST;
 import filegenerator.execution.Environnement;
 import filegenerator.filegenerator.api.model.ExecutionParameters;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

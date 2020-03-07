@@ -1,9 +1,12 @@
-package filegenerator.ast;
+package filegenerator.ast.nodes;
 
 import filegenerator.FilegeneratorLexer;
 import filegenerator.FilegeneratorParser;
+import filegenerator.ast.AbstractAST;
 import filegenerator.parser.FileGeneratorBaseListener;
+
 import java.util.List;
+
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
