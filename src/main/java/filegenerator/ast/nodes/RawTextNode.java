@@ -10,20 +10,24 @@ import filegenerator.execution.FileGeneratorException;
  */
 public class RawTextNode extends AbstractAST {
 
-    String rawText;
+    StringBuilder rawText;
 
     public String getRawText() {
-        return rawText;
+        return rawText.toString();
     }
 
     public void setRawText(String rawText) {
-        this.rawText = rawText;
+        this.rawText = new StringBuilder(rawText);
+    }
+
+    public void concatenateText(String textToConcatenate) {
+        rawText.append(textToConcatenate);
     }
 
     @Override
     public void execute() throws FileGeneratorException {
         Environnement env = Environnement.getEnvironenement();
-        env.writeToOutput(rawText);
+        env.writeToOutput(rawText.toString());
     }
 
 }

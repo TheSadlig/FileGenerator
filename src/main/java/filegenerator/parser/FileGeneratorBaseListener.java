@@ -15,9 +15,11 @@ import filegenerator.ast.nodes.ParameterNode;
 import filegenerator.ast.nodes.RawTextNode;
 import filegenerator.ast.nodes.ValueNode;
 import filegenerator.ast.nodes.VariableNode;
-import java.util.Stack;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Stack;
 
 /**
  *
@@ -40,7 +42,6 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
 
     @Override
     public void exitParameters(FilegeneratorParser.ParametersContext ctx) {
-        super.exitParameters(ctx);
         stack.pop();
 
         LOGGER.trace("Exit Parameter");
@@ -48,7 +49,6 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
 
     @Override
     public void enterParameters(FilegeneratorParser.ParametersContext ctx) {
-        super.enterParameters(ctx);
         LOGGER.trace("Enter Parameters: " + ctx.getText());
         AbstractAST parentNode = stack.peek();
         if (parentNode instanceof AbstractParametrizedNode) {
@@ -92,7 +92,6 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
 
     @Override
     public void exitAction(FilegeneratorParser.ActionContext ctx) {
-        super.exitAction(ctx);
         LOGGER.trace("Exit Action");
         stack.pop();
     }
@@ -211,18 +210,13 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
         NodeSet parentNode = nodeSetStack.peek();
         String rawText = ctx.start.getText();
 
-        LOGGER.trace("PARENT:" + parentNode.getNodeName());
         AbstractAST previousNode = parentNode.getLastNode();
-        if (previousNode != null)
-            LOGGER.trace("PREVIOUS NODE:" + previousNode.getNodeName());
 
         if (previousNode instanceof RawTextNode) {
-            LOGGER.trace("MERGE RAW");
             RawTextNode rawTextNode = (RawTextNode) previousNode;
-            rawTextNode.setRawText(rawTextNode.getRawText() + rawText);
+            rawTextNode.concatenateText(rawText);
             LOGGER.trace("Merging two Raw Text nodes");
         } else {
-            LOGGER.trace("ADDING RAW");
             RawTextNode textNode = new RawTextNode();
             textNode.setRawText(rawText);
             parentNode.addNode(textNode);
