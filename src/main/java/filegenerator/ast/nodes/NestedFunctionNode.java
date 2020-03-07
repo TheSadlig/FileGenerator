@@ -1,6 +1,5 @@
 package filegenerator.ast.nodes;
 
-import filegenerator.ast.AbstractAST;
 import filegenerator.ast.AbstractParametrizedNode;
 import filegenerator.execution.FileGeneratorException;
 import filegenerator.execution.hubs.SimpleHub;
@@ -9,7 +8,7 @@ import filegenerator.execution.hubs.SimpleHub;
  *
  * @author TheSadlig
  */
-public class DisplayNode extends AbstractAST implements AbstractParametrizedNode {
+public class NestedFunctionNode extends ValueNode implements AbstractParametrizedNode {
 
     private ParameterNode parameterNode;
 
@@ -25,7 +24,11 @@ public class DisplayNode extends AbstractAST implements AbstractParametrizedNode
     public void execute() throws FileGeneratorException {
         parameterNode.execute();
 
-        SimpleHub.dispatchAndWrite(parameterNode);
+        try {
+            value = SimpleHub.dispatch(parameterNode).toString();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            throw new FileGeneratorException("Could not find or execute nested function", ex);
+        }
     }
 
 }
