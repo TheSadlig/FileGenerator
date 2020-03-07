@@ -1,6 +1,7 @@
 package filegenerator.filegenerator;
 
 import filegenerator.execution.Environnement;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,8 +17,7 @@ import java.io.InputStream;
 public class StringUtils {
 
     public static String readFile(String path) throws FileNotFoundException, IOException {
-        InputStream is = new FileInputStream(path);
-        try {
+        try (InputStream is = new FileInputStream(path)) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             byte[] buf = new byte[16 * 1024];
             int len = 0;
@@ -30,16 +30,14 @@ public class StringUtils {
             baos.close();
 
             return message;
-        } finally {
-            is.close();
         }
     }
 
     public static void writeFile(String path, String content) throws FileNotFoundException, IOException {
         File output = new File(path);
-        FileOutputStream fos = new FileOutputStream(output);
-        fos.write(content.getBytes());
-        fos.close();
+        try (FileOutputStream fos = new FileOutputStream(output)) {
+            fos.write(content.getBytes());
+        }
     }
 
     public static String generateRandomString(long stringSize, String alphabet) {
