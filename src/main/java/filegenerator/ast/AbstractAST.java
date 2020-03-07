@@ -1,7 +1,6 @@
 package filegenerator.ast;
 
 import filegenerator.execution.FileGeneratorException;
-import java.lang.invoke.MethodHandles;
 
 /**
  *

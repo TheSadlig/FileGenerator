@@ -34,13 +34,12 @@ public class Environnement {
 
     private ExecutionParameters parameters;
 
-    public static Random rand = new Random();
+    public final static Random rand = new Random();
 
     // This map will contain the variable name, and the position of the promises
     private SortedMap<String, List<Integer>> promisesMap;
 
     // When resolving promises, every other promise needs to be shifted to have the correct position;
-
     private Environnement() {
         variableMap = new TreeMap<>();
         outputString = new StringBuilder();
@@ -152,7 +151,7 @@ public class Environnement {
             variableMap.put(variableName, var);
         } else {
             throw new FileGeneratorException(
-                    "Impossible to store the variable `" + variableName + "` due to impossible casting");
+                "Impossible to store the variable `" + variableName + "` due to impossible casting");
         }
     }
 
