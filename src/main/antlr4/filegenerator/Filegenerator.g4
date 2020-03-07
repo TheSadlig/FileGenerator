@@ -10,6 +10,9 @@ RCURLYBRACKET : '}';
 LANGLEBRACKET : '<';
 RANGLEBRACKET : '>';
 
+LPARENTHESIS : '(';
+RPARENTHESIS : ')';
+
 PIPE : '|';
 
 EQUALSIGN : '=';
@@ -62,6 +65,10 @@ loop
     : LSQUAREBRACKET LSQUAREBRACKET LSQUAREBRACKET parameters RSQUAREBRACKET RSQUAREBRACKET RSQUAREBRACKET WS? file_generator_element* WS? END WS?
     ;
 
+nested_function
+    : LPARENTHESIS parameters RPARENTHESIS
+    ;
+
 // Allows to split the input file into several output ones
 chunk
     : EQUALSIGN EQUALSIGN EQUALSIGN parameters EQUALSIGN EQUALSIGN EQUALSIGN WS? file_generator_element* END_CHUNK WS?
@@ -74,6 +81,7 @@ include_file
 value_or_array
     : array
     | value
+    | nested_function
     ;
 
 array

@@ -10,6 +10,7 @@ import filegenerator.ast.nodes.ChunkNode;
 import filegenerator.ast.nodes.DisplayNode;
 import filegenerator.ast.nodes.IncludeFileNode;
 import filegenerator.ast.nodes.LoopNode;
+import filegenerator.ast.nodes.NestedFunctionNode;
 import filegenerator.ast.nodes.NodeSet;
 import filegenerator.ast.nodes.ParameterNode;
 import filegenerator.ast.nodes.RawTextNode;
@@ -157,6 +158,31 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
         stack.push(node);
 
         parentNode.addNode(node);
+    }
+
+    @Override
+    public void exitNested_function(FilegeneratorParser.Nested_functionContext ctx) {
+        LOGGER.trace("Exit Nested Function");
+        stack.pop();
+    }
+
+    @Override
+    public void enterNested_function(FilegeneratorParser.Nested_functionContext ctx) {
+        LOGGER.trace("Enter Nested Function");
+
+        AbstractAST subNode = stack.peek();
+        if (subNode instanceof ParameterNode) {
+            String text = ctx.start.getText();
+
+            NestedFunctionNode node = new NestedFunctionNode();
+            stack.push(node);
+
+            ((ParameterNode) subNode).addValue(node);
+
+            stack.push(node);
+        } else {
+            LOGGER.error("The parent of an array should be a parametrized node");
+        }
     }
 
     @Override

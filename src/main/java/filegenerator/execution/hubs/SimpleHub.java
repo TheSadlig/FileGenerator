@@ -14,31 +14,37 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 /**
+ * This hub will handle any situation where we do not have a variable in the beginning of the parameterNode
  *
  * @author TheSadlig
  */
-public class DisplayHub {
+public class SimpleHub {
 
-    private static final Logger LOGGER = LogManager.getLogger(DisplayHub.class.getSimpleName());
+    private static final Logger LOGGER = LogManager.getLogger(SimpleHub.class.getSimpleName());
 
-    private DisplayHub() {
+    private SimpleHub() {
         throw new IllegalStateException("This class is static and should never be instantiated");
     }
 
-    public static void dispatch(ParameterNode parameterNode) throws FileGeneratorException {
-        Environnement env = Environnement.getEnvironenement();
-
+    public static AbstractTypedVariable<?> dispatch(ParameterNode parameterNode) throws FileGeneratorException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String functionName = parameterNode.getNode(0).getValue();
 
+        Function functionExecutor = getExecutor(functionName);
+
+        List<ValueNode> parametersList = parameterNode.getParametersList();
+        // We remove the name of the function to call
+        parametersList.remove(0);
+
+        return functionExecutor.execute(parametersList, new ExecutionInfo(null));
+
+    }
+
+    public static void dispatchAndWrite(ParameterNode parameterNode) throws FileGeneratorException {
+        String functionName = parameterNode.getNode(0).getValue();
+        Environnement env = Environnement.getEnvironenement();
+
         try {
-            Function functionExecutor = getExecutor(functionName);
-
-            List<ValueNode> parametersList = parameterNode.getParametersList();
-            // We remove the name of the function to call
-            parametersList.remove(0);
-
-            AbstractTypedVariable<?> result = functionExecutor.execute(parametersList, new ExecutionInfo(null));
-            env.writeToOutput(result.toString());
+            env.writeToOutput(dispatch(parameterNode).toString());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             LOGGER.info("Cannot find a native function, looking for extended");
             if ("promise".equals(functionName)) {
