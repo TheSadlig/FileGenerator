@@ -1,8 +1,10 @@
-package filegenerator.ast;
+package filegenerator.ast.nodes;
 
+import filegenerator.ast.AbstractAST;
 import filegenerator.ast.model.Chunk;
 import filegenerator.execution.Environnement;
 import filegenerator.execution.FileGeneratorException;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

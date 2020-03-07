@@ -1,6 +1,7 @@
 package filegenerator.ast.printer;
 
 import filegenerator.ast.AbstractAST;
+import filegenerator.ast.nodes.NestedFunctionNode;
 import filegenerator.ast.nodes.ValueNode;
 import filegenerator.ast.nodes.VariableNode;
 import filegenerator.ast.printer.exception.PrettyPrinterException;
@@ -14,6 +15,17 @@ public class ValueNodePrint extends PrinterInterface {
 
     public ValueNodePrint(AbstractAST abstractNode) throws PrettyPrinterException {
         super(abstractNode);
+    }
+
+    @Override
+    public void visit(Long parentNodeId) throws FileGeneratorException {
+        AbstractAST node = getAbstractNode();
+        if (node instanceof NestedFunctionNode) {
+            NestedFunctionPrint printer = new NestedFunctionPrint(node);
+            printer.visit(parentNodeId);
+        } else {
+            super.visit(parentNodeId);
+        }
     }
 
     @Override

@@ -170,18 +170,14 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
     public void enterNested_function(FilegeneratorParser.Nested_functionContext ctx) {
         LOGGER.trace("Enter Nested Function");
 
-        AbstractAST subNode = stack.peek();
-        if (subNode instanceof ParameterNode) {
-            String text = ctx.start.getText();
-
+        AbstractAST parentNode = stack.peek();
+        if (parentNode instanceof ParameterNode) {
             NestedFunctionNode node = new NestedFunctionNode();
-            stack.push(node);
-
-            ((ParameterNode) subNode).addValue(node);
+            ((ParameterNode) parentNode).addValue(node);
 
             stack.push(node);
         } else {
-            LOGGER.error("The parent of an array should be a parametrized node");
+            LOGGER.error("The parent of a nested function should be a parametrized node");
         }
     }
 

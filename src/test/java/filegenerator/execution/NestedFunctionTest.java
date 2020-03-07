@@ -1,7 +1,7 @@
 package filegenerator.execution;
 
 import filegenerator.ast.AbstractAST;
-import filegenerator.ast.TestUtils;
+import filegenerator.ast.nodes.TestUtils;
 
 import org.junit.Assert;
 import org.junit.Before;

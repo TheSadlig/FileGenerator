@@ -1,7 +1,7 @@
 package filegenerator.execution.environment;
 
 import filegenerator.ast.AbstractAST;
-import filegenerator.ast.TestUtils;
+import filegenerator.ast.nodes.TestUtils;
 import filegenerator.execution.Environnement;
 import filegenerator.filegenerator.api.model.ExecutionParameters;
 import filegenerator.filegenerator.model.AbstractTypedVariable;

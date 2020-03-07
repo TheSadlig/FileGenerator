@@ -1,11 +1,13 @@
 package filegenerator.execution.functions;
 
 import filegenerator.ast.AbstractAST;
-import filegenerator.ast.TestUtils;
+import filegenerator.ast.nodes.TestUtils;
 import filegenerator.execution.Environnement;
 import filegenerator.execution.FileGeneratorException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

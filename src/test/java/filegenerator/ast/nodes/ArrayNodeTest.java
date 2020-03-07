@@ -1,5 +1,6 @@
-package filegenerator.ast;
+package filegenerator.ast.nodes;
 
+import filegenerator.ast.AbstractAST;
 import filegenerator.execution.Environnement;
 import filegenerator.execution.FileGeneratorException;
 import filegenerator.filegenerator.model.ArrayTypedVariable;
