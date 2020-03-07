@@ -2,6 +2,7 @@ package filegenerator.ast.nodes;
 
 import filegenerator.ast.AbstractAST;
 import filegenerator.execution.FileGeneratorException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 public class ValueNode extends AbstractAST {
 
     protected String value;
-    private final static Logger LOGGER = LogManager.getLogger(ValueNode.class.getSimpleName());
+    private static final Logger LOGGER = LogManager.getLogger(ValueNode.class.getSimpleName());
 
     public String getValue() throws FileGeneratorException {
         return value;
@@ -24,7 +25,7 @@ public class ValueNode extends AbstractAST {
 
     @Override
     public void execute() throws FileGeneratorException {
-        LOGGER.debug("Value: " + value);
+// We don't want to do anything, ValueNode already contains the final value !
     }
 
 }

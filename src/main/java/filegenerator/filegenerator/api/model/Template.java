@@ -8,21 +8,21 @@ import java.io.File;
  */
 public class Template {
 
-    File template;
+    File templateFile;
 
     public Template(String path) {
         this(new File(path));
     }
 
     public Template(File file) {
-        template = file;
+        templateFile = file;
     }
 
     public String getTemplatePath() {
-        return template.getAbsolutePath();
+        return templateFile.getAbsolutePath();
     }
 
     public String getTemplateName() {
-        return template.getName();
+        return templateFile.getName();
     }
 }

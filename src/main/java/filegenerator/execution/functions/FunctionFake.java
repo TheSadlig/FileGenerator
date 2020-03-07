@@ -7,6 +7,7 @@ import filegenerator.execution.utils.FakeValueType;
 import filegenerator.execution.utils.FakerWrapper;
 import filegenerator.filegenerator.model.AbstractTypedVariable;
 import filegenerator.filegenerator.model.TypedVariable;
+
 import java.util.List;
 
 /**
@@ -17,8 +18,8 @@ public class FunctionFake implements Function {
 
     @Override
     public AbstractTypedVariable<?> execute(List<ValueNode> parametersList, ExecutionInfo executionInfo)
-            throws FileGeneratorException {
-        if (parametersList.size() < 1) {
+        throws FileGeneratorException {
+        if (parametersList.isEmpty()) {
             throw new FileGeneratorException("The Fake function needs at least one parameter");
         }
         TypedVariable<String> fakeData = new TypedVariable<>();

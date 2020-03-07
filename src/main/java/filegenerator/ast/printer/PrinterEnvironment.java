@@ -25,10 +25,8 @@ public class PrinterEnvironment {
         return instance;
     }
 
-    public void clear() {
+    public static void clear() {
         instance = null;
-        dotFileHeader = new StringBuilder();
-        dotFileLinks = new StringBuilder();
     }
 
     public Long addNode(String nodeName, Long parentNodeId) {

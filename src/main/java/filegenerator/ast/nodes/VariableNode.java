@@ -24,6 +24,7 @@ public class VariableNode extends ValueNode {
         }
     }
 
+    @Override
     public String getValue() throws FileGeneratorException {
         if (value != null) {
             return value;

@@ -15,6 +15,10 @@ import filegenerator.filegenerator.model.ArrayTypedVariable;
  */
 public class FunctionArrayPut {
 
+    private FunctionArrayPut() {
+        throw new IllegalStateException("This class is static and should never be instantiated");
+    }
+
     public static void execute(ParameterNode parameterNode) throws FileGeneratorException {
         if (parameterNode.size() < 2) {
             throw new FileGeneratorException("Displaying a variable should have 2 parameters at least");

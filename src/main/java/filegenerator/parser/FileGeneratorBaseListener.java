@@ -19,7 +19,8 @@ import filegenerator.ast.nodes.VariableNode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  *
@@ -30,9 +31,9 @@ import java.util.Stack;
  */
 public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
 
-    private final Stack<AbstractAST> stack = new Stack<>();
-    private final Stack<NodeSet> nodeSetStack = new Stack<>();
-    private final static Logger LOGGER = LogManager.getLogger(FileGeneratorBaseListener.class.getSimpleName());
+    private final Deque<AbstractAST> stack = new ArrayDeque<>();
+    private final Deque<NodeSet> nodeSetStack = new ArrayDeque<>();
+    private static final Logger LOGGER = LogManager.getLogger(FileGeneratorBaseListener.class.getSimpleName());
 
     private AbstractAST root;
 
@@ -49,7 +50,7 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
 
     @Override
     public void enterParameters(FilegeneratorParser.ParametersContext ctx) {
-        LOGGER.trace("Enter Parameters: " + ctx.getText());
+        LOGGER.trace("Enter Parameters: {}", ctx.getText());
         AbstractAST parentNode = stack.peek();
         if (parentNode instanceof AbstractParametrizedNode) {
             ParameterNode parameterNode = new ParameterNode();
@@ -124,10 +125,10 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
         stack.pop();
         nodeSetStack.pop();
 
-        if (stack.size() > 0) {
+        if (!stack.isEmpty()) {
             LOGGER.warn("Stack not empty at the end");
         }
-        if (nodeSetStack.size() > 0) {
+        if (!nodeSetStack.isEmpty()) {
             LOGGER.warn("Node Set Stack not empty at the end");
         }
     }

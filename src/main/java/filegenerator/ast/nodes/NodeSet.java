@@ -23,7 +23,7 @@ public class NodeSet extends AbstractAST {
     }
 
     public AbstractAST getLastNode() {
-        if (nodes.size() > 0) {
+        if (!nodes.isEmpty()) {
             return nodes.get(nodes.size() - 1);
         } else {
             return null;

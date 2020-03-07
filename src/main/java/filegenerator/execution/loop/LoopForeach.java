@@ -6,6 +6,7 @@ import filegenerator.execution.Environnement;
 import filegenerator.execution.FileGeneratorException;
 import filegenerator.filegenerator.model.AbstractTypedVariable;
 import filegenerator.filegenerator.model.ArrayTypedVariable;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.SortedMap;
@@ -38,7 +39,7 @@ public class LoopForeach implements LoopInterface {
             VariableNode variable = (VariableNode) parameterNode.getNode(1);
             String arrayName = variable.getVariableName();
             AbstractTypedVariable abstractTypedVariable = env.getVariable(arrayName);
-            
+
             if (abstractTypedVariable instanceof ArrayTypedVariable) {
                 ArrayTypedVariable array = (ArrayTypedVariable) abstractTypedVariable;
                 sortedMap = array.getArray();
@@ -73,7 +74,7 @@ public class LoopForeach implements LoopInterface {
 
     public boolean keepGoing() throws FileGeneratorException {
         Environnement env = Environnement.getEnvironenement();
-        if (keysQueue.size() > 0) {
+        if (!keysQueue.isEmpty()) {
             String keyName = keysQueue.poll();
             Object value = sortedMap.get(keyName);
 

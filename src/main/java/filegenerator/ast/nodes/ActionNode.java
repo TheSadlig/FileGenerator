@@ -13,9 +13,6 @@ public class ActionNode extends AbstractAST implements AbstractParametrizedNode 
 
     private ParameterNode parameterNode;
 
-    public ActionNode() {
-    }
-
     @Override
     public ParameterNode getParameterNode() {
         return parameterNode;

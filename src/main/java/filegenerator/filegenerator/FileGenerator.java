@@ -12,12 +12,14 @@ import filegenerator.execution.utils.CastWizard;
 import filegenerator.filegenerator.api.model.ExecutionParameters;
 import filegenerator.filegenerator.api.model.ExecutionResult;
 import filegenerator.parser.FileGeneratorBaseListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
+
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  *
@@ -42,9 +44,9 @@ public class FileGenerator {
      * @throws filegenerator.execution.FileGeneratorException
      */
     public static ExecutionResult execute(String templateName, ExecutionParameters parameters)
-            throws FileGeneratorException {
+        throws FileGeneratorException {
         ExecutionResult result = new ExecutionResult();
-        Environnement.getEnvironenement().clear();
+        Environnement.clear();
         Environnement env = Environnement.getEnvironenement();
 
         env.setParameters(parameters);
@@ -64,20 +66,18 @@ public class FileGenerator {
 
         PrinterEnvironment printerEnvironment = PrinterEnvironment.getInstance();
         String resultingDotFile = printerEnvironment.read();
-        printerEnvironment.clear();
+        PrinterEnvironment.clear();
 
         result.setChunks(chunks);
         result.setResultingDotFile(resultingDotFile);
         result.setOutputVariables(env.getOutputVariables());
 
-        env.clear();
+        Environnement.clear();
 
         return result;
     }
 
     private static AbstractAST getASTRoot(FilegeneratorLexer e) {
-        Environnement env = Environnement.getEnvironenement();
-
         TokenStream ts = new CommonTokenStream(e);
         FilegeneratorParser parser = new FilegeneratorParser(ts);
 
@@ -124,8 +124,8 @@ public class FileGenerator {
     }
 
     public static void execute(String inputFile, String outputFolder, int repetition)
-            throws filegenerator.execution.FileGeneratorException, IOException {
-        Environnement.getEnvironenement().clear();
+        throws filegenerator.execution.FileGeneratorException, IOException {
+        Environnement.clear();
         Environnement env = Environnement.getEnvironenement();
         String inputTemplate = StringUtils.readFile(inputFile);
         File f = new File(inputFile);

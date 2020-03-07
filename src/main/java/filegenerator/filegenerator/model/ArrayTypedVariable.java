@@ -63,8 +63,7 @@ public class ArrayTypedVariable<T> extends AbstractTypedVariable<T> {
 
     public String toString() {
         String result = "Array[";
-        result = values.entrySet().stream().map(
-                (entry) -> "(" + entry.getKey() + " => " + entry.getValue() + ")").reduce(result, String::concat);
+        result = values.entrySet().stream().map(entry -> "(" + entry.getKey() + " => " + entry.getValue() + ")").reduce(result, String::concat);
         result += "]";
         return result;
     }

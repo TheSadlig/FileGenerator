@@ -9,9 +9,11 @@ import filegenerator.execution.functions.extended.FunctionArrayPut;
 import filegenerator.execution.functions.extended.FunctionPromise;
 import filegenerator.execution.utils.VariableUtils;
 import filegenerator.filegenerator.model.AbstractTypedVariable;
-import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 /**
  *
@@ -19,7 +21,11 @@ import org.apache.logging.log4j.Logger;
  */
 public class ActionHub {
 
-    private final static Logger LOGGER = LogManager.getLogger(ActionHub.class.getSimpleName());
+    private static final Logger LOGGER = LogManager.getLogger(ActionHub.class.getSimpleName());
+
+    private ActionHub() {
+        throw new IllegalStateException("This class is static and should never be instantiated");
+    }
 
     public static void dispatch(ParameterNode parameterNode) throws FileGeneratorException {
         Environnement env = Environnement.getEnvironenement();
@@ -38,8 +44,7 @@ public class ActionHub {
             // And the variable name
             parametersList.remove(0);
 
-            Function finalFunctionExecutor = (Function) functionExecutor;
-            AbstractTypedVariable<?> typedVariable = finalFunctionExecutor.execute(parametersList, new ExecutionInfo(variableValueNode));
+            AbstractTypedVariable<?> typedVariable = functionExecutor.execute(parametersList, new ExecutionInfo(variableValueNode));
 
             env.addVariable(variableName, typedVariable);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
@@ -71,13 +76,15 @@ public class ActionHub {
     private static Function getExecutor(String functionName) throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileGeneratorException {
         Object functionExecutor = null;
         try {
-            LOGGER.info("Looking for a function specific to actions: " + createSpecificFunctionClassName(functionName));
-            Class functionClass = Class.forName(createSpecificFunctionClassName(functionName));
+            String fullFunctionName = createSpecificFunctionClassName(functionName);
+            LOGGER.debug("Looking for a function specific to actions: {}", fullFunctionName);
+            Class functionClass = Class.forName(fullFunctionName);
 
             functionExecutor = functionClass.newInstance();
         } catch (ClassNotFoundException e) {
-            LOGGER.info("Looking for a generic function: " + createFunctionClassName(functionName));
-            Class functionClass = Class.forName(createFunctionClassName(functionName));
+            String fullFunctionName = createFunctionClassName(functionName);
+            LOGGER.info("Looking for a generic function: {}", fullFunctionName);
+            Class functionClass = Class.forName(fullFunctionName);
             functionExecutor = functionClass.newInstance();
         }
         if (!(functionExecutor instanceof Function)) {

@@ -1,6 +1,7 @@
 package filegenerator.filegenerator.api;
 
 import filegenerator.filegenerator.api.model.Template;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,10 @@ import java.util.List;
 public class TemplateListHelper {
 
     private static final String EXTENSION = ".tpl";
+
+    private TemplateListHelper() {
+        throw new IllegalStateException("This class is static and should never be instantiated");
+    }
 
     public static List<Template> listAllTemplates(File folder) {
         ArrayList<Template> templates = new ArrayList<>();
