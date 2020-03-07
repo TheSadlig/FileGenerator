@@ -11,6 +11,10 @@ import filegenerator.execution.FileGeneratorException;
  */
 public class VariableUtils {
 
+    private VariableUtils() {
+        throw new IllegalStateException("This class is static and should never be instantiated");
+    }
+
     public static VariableNode getVariableParameter(ParameterNode parameterNode, int nodeIndex) throws FileGeneratorException {
         if (parameterNode.getNode(nodeIndex) instanceof VariableNode) {
             return (VariableNode) parameterNode.getNode(1);

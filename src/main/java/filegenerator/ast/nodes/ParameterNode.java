@@ -2,6 +2,7 @@ package filegenerator.ast.nodes;
 
 import filegenerator.ast.AbstractAST;
 import filegenerator.execution.FileGeneratorException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class ParameterNode extends AbstractAST {
     protected List<ValueNode> values;
 
     public ParameterNode() {
-        this.values = new ArrayList<ValueNode>();
+        this.values = new ArrayList<>();
     }
 
     public List<ValueNode> getValueNodes() {
@@ -35,8 +36,7 @@ public class ParameterNode extends AbstractAST {
 
     public List<ValueNode> getParametersList() {
         // We want to make a copy of the list to avoid changing the real list of the ParameterNode.
-        ArrayList<ValueNode> copyOfValues = new ArrayList<>(values);
-        return copyOfValues;
+        return (ArrayList) ((ArrayList) values).clone();
     }
 
     public static VariableNode getVariableParameter(ParameterNode parameterNode, int nodeIndex) throws FileGeneratorException {

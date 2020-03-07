@@ -21,9 +21,7 @@ import org.apache.logging.log4j.Logger;
 public class IncludeFileNode extends NodeSet implements AbstractParametrizedNode {
 
     private ParameterNode parameterNode;
-    private final static Logger LOGGER = LogManager.getLogger(IncludeFileNode.class.getSimpleName());
-
-    public IncludeFileNode() {}
+    private static final Logger LOGGER = LogManager.getLogger(IncludeFileNode.class.getSimpleName());
 
     @Override
     public ParameterNode getParameterNode() {

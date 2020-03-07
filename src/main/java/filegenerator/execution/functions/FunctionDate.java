@@ -5,6 +5,7 @@ import filegenerator.execution.FileGeneratorException;
 import filegenerator.execution.hubs.ExecutionInfo;
 import filegenerator.filegenerator.model.AbstractTypedVariable;
 import filegenerator.filegenerator.model.TypedVariable;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,7 +19,7 @@ import java.util.List;
 public class FunctionDate implements Function {
 
     public AbstractTypedVariable<String> execute(List<ValueNode> parametersList, ExecutionInfo executionInfo) throws FileGeneratorException {
-        if (parametersList.size() < 1) {
+        if (parametersList.isEmpty()) {
             throw new FileGeneratorException("Displaying a date should have 2 parameters at least");
         }
 

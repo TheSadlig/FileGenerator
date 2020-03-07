@@ -12,11 +12,15 @@ import filegenerator.execution.utils.VariableUtils;
  */
 public class FunctionPromise {
 
+    private FunctionPromise() {
+        throw new IllegalStateException("This class is static and should never be instantiated");
+    }
+
     public static void createPromise(ParameterNode parametersNode) throws FileGeneratorException {
         if (parametersNode.size() < 2) {
             throw new FileGeneratorException("A promise should have 1 parameters at least");
         }
-        
+
         Environnement env = Environnement.getEnvironenement();
 
         VariableNode variableNode = VariableUtils.getVariableParameter(parametersNode, 1);

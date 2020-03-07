@@ -15,9 +15,7 @@ public class LoopNode extends NodeSet implements AbstractParametrizedNode {
 
     private ParameterNode parameterNode;
 
-    private final static Logger LOGGER = LogManager.getLogger(LoopNode.class.getSimpleName());
-
-    public LoopNode() {}
+    private static final Logger LOGGER = LogManager.getLogger(LoopNode.class.getSimpleName());
 
     @Override
     public ParameterNode getParameterNode() {

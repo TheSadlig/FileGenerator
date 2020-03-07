@@ -34,12 +34,12 @@ public class Environnement {
 
     private ExecutionParameters parameters;
 
-    public final static Random rand = new Random();
+    public static final Random rand = new Random();
 
     // This map will contain the variable name, and the position of the promises
     private SortedMap<String, List<Integer>> promisesMap;
 
-    // When resolving promises, every other promise needs to be shifted to have the correct position;
+    // When resolving promises, every other promise needs to be shifted to have the correct position
     private Environnement() {
         variableMap = new TreeMap<>();
         outputString = new StringBuilder();
@@ -124,7 +124,7 @@ public class Environnement {
         promisesMap = newPromisesMap;
     }
 
-    public Boolean containsVariable(String variableName) {
+    public boolean containsVariable(String variableName) {
         return variableMap.containsKey(variableName);
     }
 
@@ -167,7 +167,7 @@ public class Environnement {
         outputString = new StringBuilder();
     }
 
-    public void clear() {
+    public static void clear() {
         instance = null;
     }
 
@@ -192,7 +192,7 @@ public class Environnement {
         return content;
     }
 
-    public HashMap<String, AbstractTypedVariable> getOutputVariables() {
+    public Map<String, AbstractTypedVariable> getOutputVariables() {
         List<String> variableNames = parameters.getExpectedVariables();
         HashMap<String, AbstractTypedVariable> outputVariables = new HashMap<>();
         for (String name : variableNames) {

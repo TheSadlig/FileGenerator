@@ -40,7 +40,7 @@ public class ArrayNode extends ValueNode {
 
         Environnement env = Environnement.getEnvironenement();
         AbstractTypedVariable<?> abstractVariable = env.getVariable(arrayName);
-        if (abstractVariable != null && abstractVariable instanceof ArrayTypedVariable<?>) {
+        if (abstractVariable instanceof ArrayTypedVariable<?>) {
             ArrayTypedVariable<?> variable = (ArrayTypedVariable<?>) abstractVariable;
 
             String index = indexNode.getValue();

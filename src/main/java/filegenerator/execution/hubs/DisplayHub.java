@@ -7,9 +7,11 @@ import filegenerator.execution.FileGeneratorException;
 import filegenerator.execution.functions.Function;
 import filegenerator.execution.functions.extended.FunctionPromise;
 import filegenerator.filegenerator.model.AbstractTypedVariable;
-import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 /**
  *
@@ -17,7 +19,11 @@ import org.apache.logging.log4j.Logger;
  */
 public class DisplayHub {
 
-    private final static Logger LOGGER = LogManager.getLogger(DisplayHub.class.getSimpleName());
+    private static final Logger LOGGER = LogManager.getLogger(DisplayHub.class.getSimpleName());
+
+    private DisplayHub() {
+        throw new IllegalStateException("This class is static and should never be instantiated");
+    }
 
     public static void dispatch(ParameterNode parameterNode) throws FileGeneratorException {
         Environnement env = Environnement.getEnvironenement();
@@ -31,8 +37,7 @@ public class DisplayHub {
             // We remove the name of the function to call
             parametersList.remove(0);
 
-            Function finalFunctionExecutor = (Function) functionExecutor;
-            AbstractTypedVariable<?> result = finalFunctionExecutor.execute(parametersList, new ExecutionInfo(null));
+            AbstractTypedVariable<?> result = functionExecutor.execute(parametersList, new ExecutionInfo(null));
             env.writeToOutput(result.toString());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             LOGGER.info("Cannot find a native function, looking for extended");

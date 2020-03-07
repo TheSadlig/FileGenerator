@@ -13,8 +13,6 @@ public class ChunkNode extends NodeSet implements AbstractParametrizedNode {
 
     private ParameterNode parameterNode;
 
-    public ChunkNode() {}
-
     @Override
     public ParameterNode getParameterNode() {
         return parameterNode;

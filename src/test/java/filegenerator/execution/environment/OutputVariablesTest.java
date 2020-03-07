@@ -5,10 +5,12 @@ import filegenerator.ast.TestUtils;
 import filegenerator.execution.Environnement;
 import filegenerator.filegenerator.api.model.ExecutionParameters;
 import filegenerator.filegenerator.model.AbstractTypedVariable;
-import java.util.HashMap;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Map;
 
 /**
  *
@@ -33,7 +35,7 @@ public class OutputVariablesTest {
         Assert.assertNotNull(astRoot);
         astRoot.execute();
 
-        HashMap<String, AbstractTypedVariable> outputVariables = env.getOutputVariables();
+        Map<String, AbstractTypedVariable> outputVariables = env.getOutputVariables();
         Assert.assertEquals(1, outputVariables.size());
         Assert.assertEquals("42", outputVariables.get("test").toString());
     }
@@ -50,7 +52,7 @@ public class OutputVariablesTest {
         Assert.assertNotNull(astRoot);
         astRoot.execute();
 
-        HashMap<String, AbstractTypedVariable> outputVariables = env.getOutputVariables();
+        Map<String, AbstractTypedVariable> outputVariables = env.getOutputVariables();
         Assert.assertEquals(2, outputVariables.size());
         Assert.assertEquals("42", outputVariables.get("test").toString());
         Assert.assertEquals("55", outputVariables.get("test2").toString());
@@ -67,7 +69,7 @@ public class OutputVariablesTest {
         Assert.assertNotNull(astRoot);
         astRoot.execute();
 
-        HashMap<String, AbstractTypedVariable> outputVariables = env.getOutputVariables();
+        Map<String, AbstractTypedVariable> outputVariables = env.getOutputVariables();
         Assert.assertEquals(1, outputVariables.size());
         Assert.assertNull(outputVariables.get("DONTEXIST"));
     }

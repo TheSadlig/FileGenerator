@@ -20,7 +20,7 @@ public class FunctionSplitLeft implements Function {
         TypedVariable<String> typedVariable = new TypedVariable<>();
         String value = parametersList.get(0).getValue();
 
-        long expectedSize = Long.valueOf(parametersList.get(1).getValue());
+        long expectedSize = Long.parseLong(parametersList.get(1).getValue());
 
         if (value.length() <= expectedSize) {
             typedVariable.setValue(value);
