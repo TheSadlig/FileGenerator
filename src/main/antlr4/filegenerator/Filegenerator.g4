@@ -73,10 +73,12 @@ include_file
 
 value_or_array
     : array
-    | value;
+    | value
+    ;
 
 array
-   : VARIABLE LSQUAREBRACKET array_index RSQUAREBRACKET;
+   : VARIABLE LSQUAREBRACKET array_index RSQUAREBRACKET
+   ;
 
 array_index
     : value;  
@@ -85,15 +87,12 @@ value
     : VARIABLE
     | IDENTIFIER
     | SPACE
-    | DECIMAL;
+    | DECIMAL
+    ;
 
 parameters
-    : parameters_inner;
-
-parameters_inner
-    :  value_or_array SEPARATOR parameters_inner
-    | value_or_array
-    ;
+      : value_or_array ( SEPARATOR value_or_array ) *
+      ;
 
 raw_text
     :  ANY
@@ -108,4 +107,5 @@ raw_text
     | RCURLYBRACKET 
     | LANGLEBRACKET
     | RANGLEBRACKET
-    | EQUALSIGN;
+    | EQUALSIGN
+    ;
