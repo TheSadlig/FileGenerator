@@ -210,19 +210,13 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
         NodeSet parentNode = nodeSetStack.peek();
         String rawText = ctx.start.getText();
 
-        LOGGER.trace("PARENT:" + parentNode.getNodeName());
         AbstractAST previousNode = parentNode.getLastNode();
-        if (previousNode != null) {
-            LOGGER.trace("PREVIOUS NODE:" + previousNode.getNodeName());
-        }
 
         if (previousNode instanceof RawTextNode) {
-            LOGGER.trace("MERGE RAW");
             RawTextNode rawTextNode = (RawTextNode) previousNode;
-            rawTextNode.setRawText(rawTextNode.getRawText() + rawText);
+            rawTextNode.concatenateText(rawText);
             LOGGER.trace("Merging two Raw Text nodes");
         } else {
-            LOGGER.trace("ADDING RAW");
             RawTextNode textNode = new RawTextNode();
             textNode.setRawText(rawText);
             parentNode.addNode(textNode);

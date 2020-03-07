@@ -81,7 +81,8 @@ array
    ;
 
 array_index
-    : value;  
+    : value
+    ;
 
 value
     : VARIABLE
@@ -95,7 +96,7 @@ parameters
       ;
 
 raw_text
-    :  ANY
+    : ANY
     | DECIMAL
     | IDENTIFIER
     | WS
