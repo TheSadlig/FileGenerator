@@ -3,11 +3,8 @@ package filegenerator.filegenerator.api;
 import filegenerator.filegenerator.FileGenerator;
 import filegenerator.filegenerator.StringUtils;
 import filegenerator.filegenerator.api.model.ExecutionParameters;
-import filegenerator.filegenerator.api.model.ExecutionResult;
 import spark.Spark;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -17,8 +14,6 @@ import java.io.File;
  * @author TheSadlig
  */
 public class FileGeneratorRest {
-
-    private final static Logger LOGGER = LogManager.getLogger(FileGeneratorRest.class.getSimpleName());
 
     public static void main(String[] args) {
 
@@ -42,9 +37,7 @@ public class FileGeneratorRest {
             executionParameters.setPath(f.getAbsoluteFile().getParentFile().getAbsolutePath());
             executionParameters.addTemplatesContent(inputFile, inputTemplate);
 
-            ExecutionResult result = FileGenerator.execute(inputFile, executionParameters);
-
-            return result;
+            return FileGenerator.execute(inputFile, executionParameters);
         }, JsonUtil.json());
 
         // List all the templates in the path
@@ -64,9 +57,7 @@ public class FileGeneratorRest {
             executionParameters.setPath("./");
             executionParameters.addTemplatesContent("main", inputTemplate);
 
-            ExecutionResult result = FileGenerator.execute("main", executionParameters);
-
-            return result;
+            return FileGenerator.execute("main", executionParameters);
         }, JsonUtil.json());
 
     }

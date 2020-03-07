@@ -20,7 +20,11 @@ import java.util.List;
  */
 public class JsonUtil {
 
-    private final static Logger LOGGER = LogManager.getLogger(JsonUtil.class.getSimpleName());
+    private static final Logger LOGGER = LogManager.getLogger(JsonUtil.class.getSimpleName());
+
+    private JsonUtil() {
+        throw new IllegalStateException("This class is static and should never be instantiated");
+    }
 
     public static String toJson(ExecutionResult result) {
         LOGGER.trace("Converting the ExecutionResult to JSON");

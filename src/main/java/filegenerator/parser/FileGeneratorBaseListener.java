@@ -15,9 +15,12 @@ import filegenerator.ast.nodes.ParameterNode;
 import filegenerator.ast.nodes.RawTextNode;
 import filegenerator.ast.nodes.ValueNode;
 import filegenerator.ast.nodes.VariableNode;
-import java.util.Stack;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  *
@@ -28,9 +31,9 @@ import org.apache.logging.log4j.Logger;
  */
 public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
 
-    private final Stack<AbstractAST> stack = new Stack<>();
-    private final Stack<NodeSet> nodeSetStack = new Stack<>();
-    private final static Logger LOGGER = LogManager.getLogger(FileGeneratorBaseListener.class.getSimpleName());
+    private final Deque<AbstractAST> stack = new ArrayDeque<>();
+    private final Deque<NodeSet> nodeSetStack = new ArrayDeque<>();
+    private static final Logger LOGGER = LogManager.getLogger(FileGeneratorBaseListener.class.getSimpleName());
 
     private AbstractAST root;
 
@@ -49,7 +52,7 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
     @Override
     public void enterParameters(FilegeneratorParser.ParametersContext ctx) {
         super.enterParameters(ctx);
-        LOGGER.trace("Enter Parameters: " + ctx.getText());
+        LOGGER.trace("Enter Parameters: {}", ctx.getText());
         AbstractAST parentNode = stack.peek();
         if (parentNode instanceof AbstractParametrizedNode) {
             ParameterNode parameterNode = new ParameterNode();
@@ -125,10 +128,10 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
         stack.pop();
         nodeSetStack.pop();
 
-        if (stack.size() > 0) {
+        if (!stack.isEmpty()) {
             LOGGER.warn("Stack not empty at the end");
         }
-        if (nodeSetStack.size() > 0) {
+        if (!nodeSetStack.isEmpty()) {
             LOGGER.warn("Node Set Stack not empty at the end");
         }
     }
@@ -213,8 +216,9 @@ public class FileGeneratorBaseListener extends FilegeneratorBaseListener {
 
         LOGGER.trace("PARENT:" + parentNode.getNodeName());
         AbstractAST previousNode = parentNode.getLastNode();
-        if (previousNode != null)
+        if (previousNode != null) {
             LOGGER.trace("PREVIOUS NODE:" + previousNode.getNodeName());
+        }
 
         if (previousNode instanceof RawTextNode) {
             LOGGER.trace("MERGE RAW");

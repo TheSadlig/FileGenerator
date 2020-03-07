@@ -77,13 +77,13 @@ public class ActionHub {
         Object functionExecutor = null;
         try {
             String fullFunctionName = createSpecificFunctionClassName(functionName);
-            LOGGER.debug("Looking for a function specific to actions: ", fullFunctionName);
+            LOGGER.debug("Looking for a function specific to actions: {}", fullFunctionName);
             Class functionClass = Class.forName(fullFunctionName);
 
             functionExecutor = functionClass.newInstance();
         } catch (ClassNotFoundException e) {
             String fullFunctionName = createFunctionClassName(functionName);
-            LOGGER.info("Looking for a generic function: ", fullFunctionName);
+            LOGGER.info("Looking for a generic function: {}", fullFunctionName);
             Class functionClass = Class.forName(fullFunctionName);
             functionExecutor = functionClass.newInstance();
         }

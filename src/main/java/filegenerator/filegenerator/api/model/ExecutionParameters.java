@@ -20,8 +20,6 @@ public class ExecutionParameters {
 
     private String path;
 
-    public ExecutionParameters() {}
-
     public Map<String, String> getTemplatesContent() {
         return templatesContent;
     }

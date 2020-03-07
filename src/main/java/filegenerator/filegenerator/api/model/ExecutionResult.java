@@ -1,9 +1,11 @@
 package filegenerator.filegenerator.api.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import filegenerator.ast.model.Chunk;
 import filegenerator.filegenerator.model.AbstractTypedVariable;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.util.Map;
 
 /**
@@ -20,8 +22,6 @@ public class ExecutionResult {
     private Map<String, Chunk> chunks = null;
 
     private Map<String, AbstractTypedVariable> outputVariables = null;
-
-    public ExecutionResult() {}
 
     public String getResultingDotFile() {
         return resultingDotFile;

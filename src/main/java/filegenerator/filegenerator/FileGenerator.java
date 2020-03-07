@@ -46,7 +46,7 @@ public class FileGenerator {
     public static ExecutionResult execute(String templateName, ExecutionParameters parameters)
         throws FileGeneratorException {
         ExecutionResult result = new ExecutionResult();
-        Environnement.getEnvironenement().clear();
+        Environnement.clear();
         Environnement env = Environnement.getEnvironenement();
 
         env.setParameters(parameters);
@@ -66,13 +66,13 @@ public class FileGenerator {
 
         PrinterEnvironment printerEnvironment = PrinterEnvironment.getInstance();
         String resultingDotFile = printerEnvironment.read();
-        printerEnvironment.clear();
+        PrinterEnvironment.clear();
 
         result.setChunks(chunks);
         result.setResultingDotFile(resultingDotFile);
         result.setOutputVariables(env.getOutputVariables());
 
-        env.clear();
+        Environnement.clear();
 
         return result;
     }
@@ -125,7 +125,7 @@ public class FileGenerator {
 
     public static void execute(String inputFile, String outputFolder, int repetition)
         throws filegenerator.execution.FileGeneratorException, IOException {
-        Environnement.getEnvironenement().clear();
+        Environnement.clear();
         Environnement env = Environnement.getEnvironenement();
         String inputTemplate = StringUtils.readFile(inputFile);
         File f = new File(inputFile);
