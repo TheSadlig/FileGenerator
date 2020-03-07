@@ -4,6 +4,7 @@ import filegenerator.ast.AbstractAST;
 import filegenerator.ast.TestUtils;
 import filegenerator.execution.Environnement;
 import filegenerator.execution.FileGeneratorException;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
