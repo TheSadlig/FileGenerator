@@ -171,6 +171,14 @@ public class Environnement {
         instance = null;
     }
 
+    public static void clearExecution() {
+        Environnement env = Environnement.getEnvironenement();
+        env.chunksMap.clear();
+        env.variableMap.clear();
+        env.promisesMap.clear();
+        env.clearOutput();
+    }
+
     public ExecutionParameters getParameters() {
         return parameters;
     }

@@ -138,6 +138,7 @@ public class FileGenerator {
                 Chunk value = entry.getValue();
                 value.writeChunk(outputFolder, i);
             }
+            Environnement.clearExecution();
         }
     }
 
