@@ -26,7 +26,7 @@ public class IncludeFileTest {
         filegenerator.execution.Environnement env = filegenerator.execution.Environnement.getEnvironenement();
 
         AbstractAST astRoot = TestUtils.parseString(
-                "Executed in the file |||includedFile.subtpl||| output: <<<var,$test>>>");
+            "Executed in the file |||includedFile.subtpl||| output: <<<var,$test>>>");
         Assert.assertNotNull(astRoot);
         astRoot.execute();
 
@@ -41,7 +41,7 @@ public class IncludeFileTest {
         params.addTemplatesContent("MySubTpl", "{{{set,$test,50}}}<<<var,$test>>>");
 
         AbstractAST astRoot = TestUtils.parseString(
-                "Executed in the file |||MySubTpl||| output: <<<var,$test>>>");
+            "Executed in the file |||MySubTpl||| output: <<<var,$test>>>");
         Assert.assertNotNull(astRoot);
         astRoot.execute();
 
@@ -56,10 +56,25 @@ public class IncludeFileTest {
         params.addTemplatesContent("MySubTpl", "{{{add,$test,50}}}<<<var,$test>>>");
 
         AbstractAST astRoot = TestUtils.parseString(
-                "|||MySubTpl||| |||MySubTpl||| |||MySubTpl|||");
+            "|||MySubTpl||| |||MySubTpl||| |||MySubTpl|||");
         Assert.assertNotNull(astRoot);
         astRoot.execute();
 
         Assert.assertEquals("50 100 150", env.getOutput());
+    }
+
+    @Test
+    public void loopIncludeFileFromEnvironment() throws filegenerator.execution.FileGeneratorException {
+        filegenerator.execution.Environnement env = filegenerator.execution.Environnement.getEnvironenement();
+
+        ExecutionParameters params = env.getParameters();
+        params.addTemplatesContent("MySubTpl", "{{{add,$test,50}}}<<<var,$test>>>");
+
+        AbstractAST astRoot = TestUtils.parseString(
+            "[[[for,5]]]|||MySubTpl|||/[[[END]]]");
+        Assert.assertNotNull(astRoot);
+        astRoot.execute();
+
+        Assert.assertEquals("50/100/150/200/250/", env.getOutput());
     }
 }

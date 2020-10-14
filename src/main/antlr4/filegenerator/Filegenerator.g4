@@ -117,4 +117,5 @@ raw_text
     | LANGLEBRACKET
     | RANGLEBRACKET
     | EQUALSIGN
+    | DOLLARSIGN
     ;

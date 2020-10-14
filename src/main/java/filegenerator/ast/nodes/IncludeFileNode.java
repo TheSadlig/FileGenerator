@@ -14,6 +14,8 @@ import org.antlr.v4.runtime.TokenStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author TheSadlig
@@ -53,5 +55,7 @@ public class IncludeFileNode extends NodeSet implements AbstractParametrizedNode
         for (AbstractAST node : nodes) {
             node.execute();
         }
+        // After executing, we need to clear the children nodes to avoid any issues in loops
+        nodes = new ArrayList<>();
     }
 }
